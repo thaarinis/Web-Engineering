@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Sidebar Navigation</title>
+    <style>
+        /* Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        /* Reset styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f8f8f8;
+            text-align: center;
+        }
+
+        /* Navigation Bar */
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #333;
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 200;
+            color: white;
+        }
+
+        /* Hamburger Menu */
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            background: #ff6f61;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* Search Bar */
+        .search-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-box {
+            width: 50%;
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+
+        /* Cart Icon */
+        .cart-icon {
+            font-size: 24px;
+            cursor: pointer;
+            background: #ff6f61;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* Sidebar Menu */
+        .sidebar {
+            position: fixed;
+            left: -280px; /* Initially hidden */
+            top: 0;
+            width: 280px;
+            height: 100%;
+            background: #222;
+            color: white;
+            transition: 0.4s;
+            padding-top: 60px;
+            overflow-y: auto; /* Scroll down option */
+        }
+
+        /* Show Sidebar */
+        .sidebar.show {
+            left: 0;
+        }
+
+        /* Sidebar Heading */
+        .sidebar h2 {
+            text-align: center;
+            padding: 15px;
+            background: #ff6f61;
+            font-size: 20px;
+        }
+
+        /* Sidebar Links */
+        .sidebar ul {
+            list-style: none;
+            padding: 10px;
+        }
+
+        .sidebar ul li {
+            padding: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            border-bottom: 1px solid #444;
+            transition: 0.3s;
+        }
+
+        .sidebar ul li:hover {
+            background: #ff6f61;
+        }
+
+        /* Submenu (Initially Hidden) */
+        .submenu {
+            display: none;
+            background: #333;
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .submenu li {
+            padding: 8px;
+            font-size: 16px;
+            border-bottom: none;
+        }
+
+        .submenu li:hover {
+            background: #ff8551;
+        }
+
+        /* Show Submenu */
+        .submenu.show {
+            display: block;
+        }
+
+        /* Welcome Text */
+        .welcome-text {
+            font-size: 28px;
+            font-weight: 600;
+            color: #333;
+            margin-top: 120px; /* Adjusted to be below the navbar */
+        }
+
+        /* Image Section */
+        .image-container {
+            margin-top: 30px; /* Adjusts the image lower */
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <div class="menu-icon" onclick="toggleSidebar()">☰</div>
+        
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Search for products...">
+        </div>
+
+        <div class="cart-icon">🛒</div>
+    </div>
+
+    <!-- Welcome Text -->
+    <div class="welcome-text">Welcome to Our Online Shopping</div>
+
+    <!-- Image Section -->
+    <div class="image-container">
+        <img src="https://freedesignfile.com/upload/2021/04/Online-shop-cartoon-illustration-vector.jpg" 
+             alt="Online Shop Illustration">
+    </div>
+
+    <!-- Sidebar Menu -->
+    <div class="sidebar" id="sidebar">
+        <h2>Categories</h2>
+        <ul>
+            <li onclick="toggleDropdown('womens_wear')">👗 Women's Wear</li>
+            <ul class="submenu" id="womens_wear">
+                <li>Sarees</li>
+                <li>Kurtis</li>
+                <li>Kurta Sets</li>
+                <li>Dupatta Sets</li>
+                <li>Suits & Dress Material</li>
+                <li>Lehengas & Gowns</li>
+                <li>Ethnic Wear</li>
+                <li>Top Wear</li>
+                <li>Bottom Wear</li>
+                <li>Sports Wear</li>
+            </ul>
+
+            <li onclick="toggleDropdown('mens_wear')">👔 Men's Wear</li>
+            <ul class="submenu" id="mens_wear">
+                <li>Top Wear</li>
+                <li>Bottom Wear</li>
+                <li>Ethnic Wear</li>
+                <li>Sports Wear</li>
+            </ul>
+
+            <li onclick="toggleDropdown('toys')">🧸 Toys</li>
+            <ul class="submenu" id="toys">
+                <li>Baby Sets</li>
+                <li>Onesies & Rompers</li>
+                <li>Soft Toys</li>
+                <li>Bags & Backpacks</li>
+            </ul>
+
+            <li onclick="toggleDropdown('grocery')">🛒 Grocery</li>
+            <ul class="submenu" id="grocery">
+                <li>Dry Fruits</li>
+                <li>Edible Seeds</li>
+                <li>Peanut Butter</li>
+                <li>Oil & Masala</li>
+                <li>Chocolates & Candies</li>
+                <li>Tea & Coffee</li>
+                <li>Milk Flavouring Powders</li>
+                <li>Instant Mixes</li>
+            </ul>
+
+            <li onclick="toggleDropdown('books')">📚 Books</li>
+            <ul class="submenu" id="books">
+                <li>Children's Books</li>
+                <li>Motivational Books</li>
+                <li>Novels</li>
+                <li>Religious Books</li>
+                <li>Economics & Commerce</li>
+                <li>UPSC & Central Exams</li>
+                <li>Competitive Exam Preparation</li>
+            </ul>
+
+            <li onclick="toggleDropdown('beauty_care')">💄 Beauty Care</li>
+            <ul class="submenu" id="beauty_care">
+                <li>Lipstick</li>
+                <li>Eye Shadow & Liner</li>
+                <li>Face Makeup</li>
+                <li>Makeup Kits & Combos</li>
+                <li>Hair Curlers</li>
+                <li>Nail Makeup</li>
+                <li>Brushes & Accessories</li>
+                <li>Perfumes</li>
+                <li>Body Lotion</li>
+                <li>Face Oil & Serum</li>
+                <li>Face Wash</li>
+                <li>Face Masks & Peels</li>
+                <li>Hair Oil & Shampoo</li>
+                <li>Soaps & Scrubs</li>
+            </ul>
+        </ul>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("show");
+        }
+
+        function toggleDropdown(id) {
+            document.getElementById(id).classList.toggle("show");
+        }
+    </script>
+
+</body>
+</html>
